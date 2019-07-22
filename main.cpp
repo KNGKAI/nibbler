@@ -3,6 +3,7 @@
 #include "curses.h"
 #include <dlfcn.h>
 #define _GNU_SOURCE
+#include <iomanip>
 
 #define MS_PER_UPDATE 1000
 #define WIDTH 40
@@ -17,7 +18,7 @@ class GraphicEngine{
         GraphicEngine(){
             this->game = new Game(Coord(WIDTH, HEIGHT));
             
-            void *hndl = dlopen("lib/ncurses.dylib", RTLD_NOW);
+            void *hndl = dlopen("lib/ncurses.dynlib", RTLD_NOW);
             if(hndl == NULL){
                std::cout << dlerror() << std::endl;
                exit(-1);
@@ -62,7 +63,6 @@ class GraphicEngine{
 };
 
 GraphicEngine myEngine;
-Map myMap;
 
 void processInput(){
     IGraphic * current = myEngine.getCurrentLib();
@@ -75,7 +75,7 @@ void update(){
 }
 
 void render(){
-    myMap = myEngine.getGameMap();
+    Map myMap = myEngine.getGameMap();
     IGraphic * current = myEngine.getCurrentLib();
     current->render(myMap);
 }

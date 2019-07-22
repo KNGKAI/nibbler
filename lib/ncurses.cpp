@@ -10,6 +10,8 @@ Ncurses::Ncurses()
     noecho();
     nodelay(stdscr, TRUE);
     ////////////////////////
+
+    this->command = nullptr;
 }
 Ncurses::~Ncurses()
 {
@@ -17,6 +19,8 @@ Ncurses::~Ncurses()
     return;
 }
 int Ncurses::getCommand(){
+    if (this->command == nullptr)
+        return -1;
     return this->command->command;
 }
 void Ncurses::processInput()
