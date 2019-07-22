@@ -3,7 +3,6 @@
 
 #include "Coord.hpp"
 #include "Noise.hpp"
-#include "ENode.hpp"
 #include <iostream>
 
 class Map

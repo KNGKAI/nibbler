@@ -2,15 +2,21 @@
 #define GAME_HPP
 
 #include <chrono>
+#include <dlfcn.h>
 
 #include "Coord.hpp"
 #include "Map.hpp"
 #include "Player.hpp"
 #include "EKeycode.hpp"
+#include "IGraphics.hpp"
 
-#define FREQ 0.1
+#define FREQ 0.2
 #define FILL 0.3
-#define UPDATE_RATE 0.2
+
+#define NODE_EMPTY 0
+#define NODE_WALL 1
+#define NODE_PLAYER 2
+#define NODE_TREAT 3
 
 class Game
 {
@@ -25,7 +31,7 @@ class Game
         void    CreateTreats();
         void    GameOver(std::string reason);
     public:
-        Game(const Coord size, int argc, char **argv);
+        Game(const Coord size);
         ~Game();
         
         Map         GetDisplayMap();
@@ -33,15 +39,17 @@ class Game
         void        Update();
         void        Pause();
         void        Input(EKeycode key);
+        bool        Running();
 };
 
-Game::Game(const Coord size, int argc, char **argv) :
+Game::Game(const Coord size) :
     _map(size),
     _player(size.x / 2, size.y / 2),
-    _running(false),
+    _running(true),
     _paused(true)
 {
     this->CreateTreats();
+    this->_map.PerlinFill(FREQ, 0, FILL);
     return;
 }
 
@@ -108,21 +116,15 @@ Map Game::GetDisplayMap()
 {
     Map displayMap(this->_map.GetWidth(), this->_map.GetHeight());
     
-    for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++)
-    {
-        displayMap.SetNode((*i).x, (*i).y, 3);
-    }
+    for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++) { displayMap.SetNode((*i).x, (*i).y, NODE_TREAT); }
     for (int x = 0; x < displayMap.GetWidth(); x++)
-        {
-            for (int y = 0; y < displayMap.GetHeight(); y++)
-            {
-                if (this->_map.GetNode(x, y) > 0) { displayMap.SetNode(x, y, 1); }
-            }
-    }
-    for (std::vector<Coord>::iterator i = this->_player.GetBody().begin(); i < this->_player.GetBody().end(); i++)
     {
-        if (displayMap.GetNode(i->x, i->y) == 0) { displayMap.SetNode(i->x, i->y, 2); }
+        for (int y = 0; y < displayMap.GetHeight(); y++)
+        {
+            if (this->_map.GetNode(x, y) > 0) { displayMap.SetNode(x, y, NODE_WALL); }
+        }
     }
+    for (std::vector<Coord>::iterator i = this->_player.GetBody().begin(); i < this->_player.GetBody().end(); i++) { displayMap.SetNode(i->x, i->y, NODE_PLAYER); }
     return (displayMap);
 }
 
@@ -146,24 +148,16 @@ void Game::Input(EKeycode key)
 {
     switch (key)
     {
-        case Keycode_Up:
-            this->_player.ChangeDirection(Up);
-            break;
-        case Keycode_Down:
-            this->_player.ChangeDirection(Down);
-            break;
-        case Keycode_Left:
-            this->_player.ChangeDirection(Left);
-            break;
-        case Keycode_Right:
-            this->_player.ChangeDirection(Right);
-            break;
-        case Keycode_Pause:
-            this->Pause();
-            break;
-        default:
-            break;
+        case Keycode_Up: this->_player.ChangeDirection(Up); break;
+        case Keycode_Down: this->_player.ChangeDirection(Down); break;
+        case Keycode_Left: this->_player.ChangeDirection(Left); break;
+        case Keycode_Right: this->_player.ChangeDirection(Right); break;
+        case Keycode_Pause: this->Pause(); break;
+        case Keycode_Exit: this->_running = false; break;
+        default: break;
     }
 }
+
+bool Game::Running() { return(this->_running); }
 
 #endif
