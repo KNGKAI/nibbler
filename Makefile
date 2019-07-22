@@ -34,13 +34,3 @@ run: re
 	@echo "RUN"
 	@echo "---"
 	@$(TARGET)
-
-SDL2: SDL2.tar.gz
-	mkdir -p SDL2
-	mkdir -p SDL2/build
-	tar -xf SDL2.tar.gz -C SDL2 --strip-components 1
-	cd SDL2
-	make
-
-SDL2.tar.gz:
-	curl -o SDL2.tar.gz https://www.libsdl.org/release/SDL2-2.0.9.tar.gz
