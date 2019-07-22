@@ -8,7 +8,6 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "EKeycode.hpp"
-#include "IGraphics.hpp"
 
 #define FREQ 0.2
 #define FILL 0.3

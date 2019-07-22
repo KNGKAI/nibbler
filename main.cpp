@@ -48,10 +48,6 @@ void DrawSDL()
         {
             _time += 0.1f;
         }
-        if (!game.Running())
-        {
-            quit = true;
-        }
         ////////////
         
         //////////INPUT
@@ -336,7 +332,7 @@ void DrawNcurses()
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    //DrawSDL();
+    DrawSDL();
     //DrawNcurses();
     //DrawOpenGL(argc, argv);
     return 0;
