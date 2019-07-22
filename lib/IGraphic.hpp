@@ -20,6 +20,7 @@
         public:
             virtual void processInput() = 0;
             virtual void render(Map & m) = 0;
+            virtual int  getCommand() = 0;
     };
 
 #endif

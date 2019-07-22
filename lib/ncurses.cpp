@@ -16,6 +16,9 @@ Ncurses::~Ncurses()
     endwin();
     return;
 }
+int Ncurses::getCommand(){
+    return this->command->command;
+}
 void Ncurses::processInput()
 {
     c_queue * node = new c_queue;

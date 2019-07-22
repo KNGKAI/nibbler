@@ -9,6 +9,11 @@
             ~Ncurses();
             virtual void processInput(void);
             virtual void render(Map & m);
+            virtual int  getCommand();
     };
+
+    extern "C" IGraphic * newGraphic(){
+        return new Ncurses();
+    }
 
 #endif
