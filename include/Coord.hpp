@@ -22,13 +22,9 @@ Coord::~Coord() {}
 
 Coord &Coord::operator=(const Coord &rhs)
 {
-	if (this != rhs)
-	{
-
-		this->x = rhs.x;
-		this->y = rhs.y;
-	}
-    return (*this);
+	this->x = rhs.x;
+	this->y = rhs.y;
+	return (*this);
 }
 
 #endif
