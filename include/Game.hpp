@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef GAME_HPP
 #define GAME_HPP
 
@@ -10,7 +8,6 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "EKeycode.hpp"
-#include "Vec.hpp"
 
 #define FREQ 0.2
 #define FILL 0.3
@@ -25,7 +22,6 @@ class Game
     private:
         Map                 _map;
         Player              _player;
-//        std::vector<Vec<int>>  _treats;
 		std::vector<Coord>	_treats;
         bool                _running;
         bool                _paused;
