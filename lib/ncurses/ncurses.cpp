@@ -11,13 +11,14 @@ Ncurses::~Ncurses()
     return;
 }
 
-void Ncurses::init()
+void Ncurses::open()
 {
     initscr();
     cbreak();
     keypad(stdscr, TRUE);
     noecho();
     nodelay(stdscr, TRUE);
+    this->init = true;
 }
 
 void Ncurses::close()
@@ -51,28 +52,28 @@ void Ncurses::render(Map &m)
                 switch (m.GetNode(x, y))
                 {
                 case NODE_EMPTY:
-                    printw(" ");
+                    addstr(" ");
                     break;
                 case NODE_WALL:
-                    printw("X");
+                    addstr("X");
                     break;
                 case NODE_PLAYER:
-                    printw("0");
+                    addstr("0");
                     break;
                 case NODE_TREAT:
-                    printw("+");
+                    addstr("+");
                     break;
                 default:
-                    printw("?");
+                    addstr("?");
                     break;
                 }
             }
             else
             {
-                printw("X");
+                addstr("X");
             }
         }
-        printw("\n");
+        addstr("\n");
     }
     refresh();
 }

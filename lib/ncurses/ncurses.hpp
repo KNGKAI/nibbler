@@ -8,7 +8,7 @@
         public:
             Ncurses();
             ~Ncurses();
-            virtual void init();
+            virtual void open();
             virtual void close();
             virtual void processInput(void);
             virtual void render(Map & m);

@@ -13,15 +13,15 @@ class OpenGL : public IGraphic{
     public:
         OpenGL();
         ~OpenGL();
-        virtual void init();
+        virtual void open();
         virtual void close();
         virtual void processInput(void);
         virtual void render(Map & m);
         virtual int  getCommand();
 };
 
-// extern "C" IGraphic * newGraphic(){
-//     return new OpenGL();
-// }
+extern "C" IGraphic * newGraphic(){
+    return new OpenGL();
+}
 
 #endif

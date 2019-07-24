@@ -48,3 +48,10 @@ run: re
 	@echo "RUN"
 	@echo "---"
 	@$(TARGET)
+
+SH = curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh
+
+install:
+	sh -c "$(SH)"
+	brew install glfw
+	brew install sdl2

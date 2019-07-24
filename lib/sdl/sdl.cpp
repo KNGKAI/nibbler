@@ -12,12 +12,13 @@ SDL::~SDL()
     return;
 }
 
-void SDL::init()
+void SDL::open()
 {
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer(360, 240, 0, &window, &renderer);
     SDL_SetWindowTitle(window, "nibbler SDL");
     SDL_UpdateWindowSurface(window);
+    this->init = true;
 }
 
 void SDL::close()
@@ -52,9 +53,9 @@ void SDL::processInput()
                 case SDLK_DOWN: command = KEY_DOWN; break;
                 case SDLK_SPACE: command = 32; break;
                 case SDLK_ESCAPE: command = 27; break;
-                case SDLK_1: command = 1; break;
-                case SDLK_2: command = 2; break;
-                case SDLK_3: command = 3; break;
+                case SDLK_1: command = 49; break;
+                case SDLK_2: command = 50; break;
+                case SDLK_3: command = 51; break;
                 default: break;
             }
         }
