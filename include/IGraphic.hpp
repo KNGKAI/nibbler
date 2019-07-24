@@ -11,7 +11,11 @@ typedef struct c_queue{
 class IGraphic{
     protected:
             c_queue * command;
+    private:
+        bool _init = false;
     public:
+        virtual void init() = 0;
+        virtual void close() = 0;
         virtual void processInput() = 0;
         virtual void render(Map & m) = 0;
         virtual int  getCommand() = 0;

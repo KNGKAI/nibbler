@@ -14,7 +14,7 @@ $(NAME): $(OBJ)
 	@$(COMPILER) -w -dynamiclib -o $(NAME) $(OBJ) $(DEP) $(INC) ../../src/*
 
 $(OBJ):
-	@$(COMPILER) -w -c $(SRC) $(DEP_INC)
+	@$(COMPILER) -w -c $(SRC) $(DEP_INC) $(INC)
 
 clean:
 	@rm -f $(OBJ)

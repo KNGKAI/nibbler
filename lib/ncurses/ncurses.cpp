@@ -3,23 +3,34 @@
 
 Ncurses::Ncurses()
 {
+    this->command = nullptr;
+}
+
+Ncurses::~Ncurses()
+{
+    return;
+}
+
+void Ncurses::init()
+{
     initscr();
     cbreak();
     keypad(stdscr, TRUE);
     noecho();
     nodelay(stdscr, TRUE);
-    this->command = nullptr;
 }
-Ncurses::~Ncurses()
+
+void Ncurses::close()
 {
     endwin();
-    return;
 }
+
 int Ncurses::getCommand(){
     if (this->command == nullptr)
         return -1;
     return this->command->command;
 }
+
 void Ncurses::processInput()
 {
     c_queue * node = new c_queue;
@@ -27,6 +38,7 @@ void Ncurses::processInput()
     node->next = this->command;
     this->command = node;
 }
+
 void Ncurses::render(Map &m)
 {
     clear();

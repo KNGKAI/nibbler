@@ -8,8 +8,7 @@ enum EKeycode
     Keycode_Left,
     Keycode_Right,
     Keycode_Pause,
-    Keycode_Exit,
-    Keycode_None
+    Keycode_Exit
 };
 
 #endif

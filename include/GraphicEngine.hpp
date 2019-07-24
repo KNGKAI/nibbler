@@ -12,9 +12,15 @@ class GraphicEngine{
     private:
         size_t currentLib;
         IGraphic * libs[4];
-        Game * game;
+        
+        void        *handler;
+        void        loadLibrary(std::string name);
+        void        switchLibrary(int i);
+        IGraphic    *lib;
+        Game        *game;
     public:
         GraphicEngine(int width, int height);
+        ~GraphicEngine();
         IGraphic * getCurrentLib();
         Map getGameMap();
         void updateGame();

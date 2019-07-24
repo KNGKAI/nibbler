@@ -4,15 +4,23 @@
 
 OpenGL::OpenGL()
 {
-    glfwInit();
-    this->window = glfwCreateWindow(640, 480, "Nibbler OpenGL", NULL, NULL);
-    glfwMakeContextCurrent(window);
     this->command = nullptr;
 }
 OpenGL::~OpenGL()
 {
-    glfwTerminate();
     return;
+}
+
+void OpenGL::init()
+{
+    glfwInit();
+    this->window = glfwCreateWindow(640, 480, "Nibbler OpenGL", NULL, NULL);
+    glfwMakeContextCurrent(window);
+}
+
+void OpenGL::close()
+{
+    glfwTerminate();
 }
 
 int OpenGL::getCommand()
@@ -33,6 +41,9 @@ void OpenGL::processInput()
     else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { command = KEY_DOWN; }
     else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { command = KEY_LEFT; }
     else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { command = KEY_RIGHT; }
+    else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) { command = 1; }
+    else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) { command = 2; }
+    else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) { command = 3; }
     c_queue * node = new c_queue;
     node->command = command;
     node->next = this->command;
