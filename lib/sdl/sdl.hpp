@@ -11,15 +11,12 @@ class SDL_Graphic : public IGraphic{
         int             width = 40;
         int             height = 20;
         int             scale = 10;
-        // Game            game = Game(Coord(width, height));
-        // Map             m = game.GetDisplayMap();
-        float           _time;
-        SDL_Event       e;
+        
         SDL_Window*     window;
         SDL_Renderer*  renderer;
         
         void  onEvent(SDL_Event& e);
-        void  DrawPixel(SDL_Renderer * renderer, int x, int y);
+        void  DrawPixel(int x, int y);
 
     public:
         SDL_Graphic();

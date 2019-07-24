@@ -15,6 +15,7 @@ void processInput(){
     IGraphic * current = myEngine.getCurrentLib();
     current->processInput();
     myEngine.inputToGame(current->getCommand());
+    std::cout << "---processInput MAIN----\n";
 }
 
 void update(){
