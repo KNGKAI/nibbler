@@ -34,7 +34,6 @@ class Game
         ~Game();
 
         Map         GetDisplayMap();
-        void        Start();
         void        Update();
         void        Pause();
         void        Input(EKeycode key);

@@ -86,13 +86,6 @@ Map Game::GetDisplayMap()
     return (displayMap);
 }
 
-void Game::Start()
-{
-    if (this->_running) return;
-    this->_running = true;
-    while (this->_running) Update();
-}
-
 void Game::Update()
 {
     if (this->_paused) { return; }
