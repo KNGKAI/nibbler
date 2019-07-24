@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/**/*",
                 "${workspaceFolder}/include/*",
-                "${workspaceFolder}/lib/*"
+                "${workspaceFolder}/lib/*",
+                "~/.brew/**/*"
             ],
             "defines": [],
             "macFrameworkPath": [
