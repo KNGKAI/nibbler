@@ -12,7 +12,6 @@ class Coord
         int y;
 
         Coord &operator=(const Coord &rhs);
-		bool operator==(const Coord&) const;
 };
 
 Coord::Coord() : x(0), y(0) {}
@@ -30,11 +29,6 @@ Coord &Coord::operator=(const Coord &rhs)
 		this->y = rhs.y;
 	}
     return (*this);
-}
-
-bool operator==(const Cood &rhs) const
-{
-	return (rhs.x == this.x && rhs.y == this.y);
 }
 
 #endif
