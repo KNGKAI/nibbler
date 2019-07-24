@@ -4,7 +4,7 @@
 #include "EDirection.hpp"
 #include "Coord.hpp"
 #include "Map.hpp"
-#include <vector> 
+#include <vector>
 
 class Player
 {
@@ -22,7 +22,7 @@ class Player
         Player(Coord position);
         Player(int x, int y);
         ~Player();
-        
+
         void                Move();
         void                ChangeDirection(EDirection direction);
         void                IncreaseSize();
