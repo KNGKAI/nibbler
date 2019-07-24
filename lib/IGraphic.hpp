@@ -2,10 +2,6 @@
 #define IGRAPHIC_H
 
 	#include "Vec.hpp"
-	struct Color
-	{
-		float r, g, b, a;
-	};
 
     // Command Queue
     typedef struct c_queue{
