@@ -19,10 +19,6 @@
         public:
             virtual void 	processInput() = 0;
             virtual void 	render() = 0;
-
-			virtual void 	DrawSquare(int, int, const Color&) = 0;
-			virtual int		GetWidth() const = 0;
-			virtual int		GetHeight() const = 0;
     };
 
 #endif
