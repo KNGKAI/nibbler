@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef GAME_HPP
 #define GAME_HPP
 
@@ -8,6 +10,7 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "EKeycode.hpp"
+#include "Vec.hpp"
 
 #define FREQ 0.2
 #define FILL 0.3
@@ -22,7 +25,8 @@ class Game
     private:
         Map                 _map;
         Player              _player;
-        std::vector<Coord>  _treats;
+//        std::vector<Vec<int>>  _treats;
+		std::vector<Coord>	_treats;
         bool                _running;
         bool                _paused;
 
@@ -32,7 +36,7 @@ class Game
     public:
         Game(const Coord size);
         ~Game();
-        
+
         Map         GetDisplayMap();
         void        Start();
         void        Update();
@@ -114,7 +118,7 @@ void Game::GameOver(std::string reason)
 Map Game::GetDisplayMap()
 {
     Map displayMap(this->_map.GetWidth(), this->_map.GetHeight());
-    
+
     for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++) { displayMap.SetNode((*i).x, (*i).y, NODE_TREAT); }
     for (int x = 0; x < displayMap.GetWidth(); x++)
     {

@@ -6,7 +6,7 @@
 /*   By: jwolf <jwolf@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 09:50:11 by jwolf             #+#    #+#             */
-/*   Updated: 2019/07/24 08:03:55 by jwolf            ###   ########.fr       */
+/*   Updated: 2019/07/24 08:35:34 by jwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,24 @@ void 		Snoekie::Move(Vec<int> dir, bool overFood)
 	if (!overFood) this->Body.erase(this->Body.begin());
 }
 
-// void					Snoekie::Render(IRenderer *render) const
-// {
-// 	for (auto a: this->Body)
-// 		render->DrawSquare(a.getX(), a.getY(), {1, 0, 0, 1});
-// }
+void					Snoekie::Render(IGraphic *render) const
+{
+	for (auto a: this->Body)
+		render->DrawSquare(a.getX(), a.getY(), {1, 0, 0, 1});
+}
 
-// void					Snoekie::Update(IRenderer *render)
-// {
-// 	Vec<int> Head = this->Body.back();
-// 	if (
-// 		Head.getX() < 0 ||
-// 		Head.getY() < 0 ||
-// 		Head.getX() >= render->GetWidth() ||
-// 		Head.getY() >= render->GetHeight()
-// 		)
-// 		Game::Get()->KillSnake();
-
-// }
+void					Snoekie::Update(IGraphic *render)
+{
+	Vec<int> Head = this->Body.back();
+	if (
+		Head.getX() < 0 ||
+		Head.getY() < 0 ||
+		Head.getX() >= render->GetWidth() ||
+		Head.getY() >= render->GetHeight()
+		)
+		return ;
+		// Game::Get()->KillSnake();
+}
 
 bool					Snoekie::collision(IEntity *ent) const
 {

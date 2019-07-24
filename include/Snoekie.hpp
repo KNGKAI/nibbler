@@ -6,7 +6,7 @@
 /*   By: jwolf <jwolf@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 09:33:10 by jwolf             #+#    #+#             */
-/*   Updated: 2019/07/24 08:03:20 by jwolf            ###   ########.fr       */
+/*   Updated: 2019/07/24 08:33:26 by jwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <vector>
 #include "IEntity.hpp"
 #include "Vec.hpp"
+#include "IGraphic.hpp"
 
 
 class Snoekie: public IEntity
@@ -25,8 +26,8 @@ class Snoekie: public IEntity
 		Snoekie(Snoekie const&);
 		Snoekie &operator=(const Snoekie&);
 
-		// virtual void Render(IRenderer*) const;
-		// virtual void Update(IRenderer*);
+		virtual void Render(IGraphic*) const;
+		virtual void Update(IGraphic*);
 		virtual bool collision(IEntity*) const;
 		virtual bool inBounds(const Vec<int>&) const;
 
