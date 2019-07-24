@@ -4,7 +4,7 @@ GraphicEngine::GraphicEngine(int width, int height)
 {
     this->game = new Game(Coord(width, height));
     
-    void *hndl = dlopen("lib/opengl/opengl.dynlib", RTLD_NOW);
+    void *hndl = dlopen("lib/sdl/sdl.dynlib", RTLD_NOW);
     if(hndl == NULL){
         std::cout << dlerror() << std::endl;
         exit(-1);

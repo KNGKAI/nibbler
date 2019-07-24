@@ -4,7 +4,7 @@ Game::Game(const Coord size) :
     _map(size),
     _player(size.x / 2, size.y / 2),
     _running(true),
-    _paused(false)
+    _paused(true)
 {
     this->CreateTreats();
     this->_map.PerlinFill(FREQ, 0, FILL);
