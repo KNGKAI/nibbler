@@ -13,6 +13,7 @@ Ncurses::~Ncurses()
 
 void Ncurses::open()
 {
+    if (this->init) { return; }
     initscr();
     cbreak();
     keypad(stdscr, TRUE);
@@ -23,7 +24,7 @@ void Ncurses::open()
 
 void Ncurses::close()
 {
-    endwin();
+    if (this->init) { endwin(); }
 }
 
 int Ncurses::getCommand(){

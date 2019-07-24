@@ -14,6 +14,7 @@ SDL::~SDL()
 
 void SDL::open()
 {
+    if (this->init) { return; }
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer(360, 240, 0, &window, &renderer);
     SDL_SetWindowTitle(window, "nibbler SDL");
@@ -23,7 +24,7 @@ void SDL::open()
 
 void SDL::close()
 {
-    SDL_DestroyWindow(window);
+    if (this->init) { SDL_DestroyWindow(window); }
     //SDL_Quit();
 }
 

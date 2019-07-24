@@ -3,32 +3,40 @@
 GraphicEngine::GraphicEngine(int width, int height)
 {
     this->game = new Game(Coord(width, height));
-    this->loadLibrary("lib/ncurses/ncurses.dynlib");
-    //this->loadLibrary("lib/opengl/opengl.dynlib");
-    //this->lib = this->loadLibrary("lib/sdl/sdl.dynlib");
+    this->lib = nullptr;
+    //this->loadLibrary("lib/ncurses/ncurses.dynlib");
+    this->loadLibrary("lib/opengl/opengl.dynlib");
+    //this->loadLibrary("lib/sdl/sdl.dynlib");
 }
 
 GraphicEngine::~GraphicEngine()
 {
-    dlclose(this->handler);
-    
     return;
 }
 
 void GraphicEngine::loadLibrary(std::string name)
 {
+    if (this->lib)
+    {
+        this->lib->close();
+        dlclose(this->handler);
+    }
     this->handler = dlopen(name.c_str(), RTLD_NOW);
     if(this->handler == NULL){
         std::cout << dlerror() << std::endl;
         exit(-1);
     }
     void *mkr = dlsym(this->handler, "newGraphic");
+    this->lib = reinterpret_cast<IGraphic *(*)()>(mkr)();
+}
+
+void GraphicEngine::closeLibrary()
+{
     if (this->lib)
     {
-        this->lib->close();
-        dlclose(this->handler);
+         dlclose(this->handler);
+         this->lib->close();
     }
-    this->lib = reinterpret_cast<IGraphic *(*)()>(mkr)();
 }
 
 IGraphic *GraphicEngine::getCurrentLib()

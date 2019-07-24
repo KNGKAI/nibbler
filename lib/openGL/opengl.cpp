@@ -13,6 +13,7 @@ OpenGL::~OpenGL()
 
 void OpenGL::open()
 {
+    if (this->init) { return; }
     glfwInit();
     this->window = glfwCreateWindow(640, 480, "Nibbler OpenGL", NULL, NULL);
     glfwMakeContextCurrent(window);
@@ -21,7 +22,7 @@ void OpenGL::open()
 
 void OpenGL::close()
 {
-    glfwTerminate();
+    if (this->init) { glfwTerminate(); }
 }
 
 int OpenGL::getCommand()

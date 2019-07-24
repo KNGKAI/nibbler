@@ -15,6 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "COMPILING MAIN"
 	@$(COMPILER) -w main.cpp -o $(TARGET) $(OBJ) $(FLAGS)
+	@echo "DONE"
 	@echo "COMPILING LIBS"
 	@make -C lib/ncurses
 	@make -C lib/opengl

@@ -15,6 +15,7 @@ class GraphicEngine{
 
         void        *handler;
         void        loadLibrary(std::string name);
+        void        closeLibrary();
         IGraphic    *lib;
         Game        *game;
     public:
