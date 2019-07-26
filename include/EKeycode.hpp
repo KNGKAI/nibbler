@@ -7,8 +7,7 @@ enum EKeycode
     Keycode_Down,
     Keycode_Left,
     Keycode_Right,
-    Keycode_Pause,
-    Keycode_Exit
+    Keycode_Pause
 };
 
 #endif

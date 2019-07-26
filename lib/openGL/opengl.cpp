@@ -15,7 +15,7 @@ void OpenGL::open()
 {
     if (this->init) { return; }
     glfwInit();
-    this->window = glfwCreateWindow(640, 480, "Nibbler OpenGL", NULL, NULL);
+    this->window = glfwCreateWindow(500, 500, "Nibbler OpenGL", NULL, NULL);
     glfwMakeContextCurrent(window);
     this->init = true;
 }

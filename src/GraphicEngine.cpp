@@ -11,6 +11,7 @@ GraphicEngine::GraphicEngine(int width, int height)
 
 GraphicEngine::~GraphicEngine()
 {
+    dlclose(this->handler);
     return;
 }
 
@@ -23,8 +24,7 @@ void GraphicEngine::loadLibrary(std::string name)
     }
     this->handler = dlopen(name.c_str(), RTLD_NOW);
     if(this->handler == NULL){
-        std::cout << dlerror() << std::endl;
-        exit(-1);
+        throw GraphicEngine::LibraryNotFoundException();
     }
     void *mkr = dlsym(this->handler, "newGraphic");
     this->lib = reinterpret_cast<IGraphic *(*)()>(mkr)();
@@ -60,7 +60,8 @@ void GraphicEngine::inputToGame(int i)
     switch (i)
     {
         case 27: //ESC
-            this->game->Input(Keycode_Exit);
+            this->lib->close();
+            std::exit(0);
             break;
         case 32: //SPACE
             this->game->Input(Keycode_Pause);
@@ -87,4 +88,9 @@ void GraphicEngine::inputToGame(int i)
             this->loadLibrary("lib/sdl/sdl.dynlib");
             break;
     }
+}
+
+const char *	GraphicEngine::LibraryNotFoundException::what() const throw()
+{
+	return "Library not found.";
 }

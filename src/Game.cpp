@@ -50,6 +50,7 @@ void Game::CheckPlayer()
             c++;
         }
         count++;
+        if (count >= this->_player.GetSize()) { return; }
     }
 }
 
@@ -59,7 +60,7 @@ void Game::CreateTreats()
     {
         for (int y = 0; y < this->_map.GetHeight(); y++)
         {
-            if (this->_map.GetNode(x, y) == 0 && x % 5 == 0 && y % 5 == 0) { this->_treats.push_back(Coord(x, y)); }
+            if (this->_map.GetNode(x, y) == 0 && x % 5 == 0 && y % 5 == 0 && x != this->_map.GetWidth() / 2) { this->_treats.push_back(Coord(x, y)); }
         }
     }
 }
@@ -103,7 +104,6 @@ void Game::Input(EKeycode key)
         case Keycode_Left: this->_player.ChangeDirection(Left); break;
         case Keycode_Right: this->_player.ChangeDirection(Right); break;
         case Keycode_Pause: this->Pause(); break;
-        case Keycode_Exit: std::exit(0); break;
         default: break;
     }
 }

@@ -28,6 +28,7 @@ class Player
         void                IncreaseSize();
         Coord               GetPosition();
         std::vector<Coord>  GetBody();
+        int                 GetSize();
 };
 
 #endif

@@ -14,17 +14,22 @@ class GraphicEngine{
         IGraphic * libs[4];
 
         void        *handler;
-        void        loadLibrary(std::string name);
         void        closeLibrary();
         IGraphic    *lib;
         Game        *game;
     public:
         GraphicEngine(int width, int height);
         ~GraphicEngine();
-        IGraphic * getCurrentLib();
-        Map getGameMap();
-        void updateGame();
-        void inputToGame(int i);
+        void        loadLibrary(std::string name);
+        IGraphic    *getCurrentLib();
+        Map         getGameMap();
+        void        updateGame();
+        void        inputToGame(int i);
+        class LibraryNotFoundException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
 };
 
 #endif

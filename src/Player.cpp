@@ -1,18 +1,18 @@
 #include "Player.hpp"
 
-Player::Player() : _position(0, 0), _direction(Up), _wantedDirection(Up), _size(6)
+Player::Player() : _position(0, 0), _direction(Up), _wantedDirection(Up), _size(4)
 {
     CreateBody();
     return;
 }
 
-Player::Player(Coord position) : _position(position), _direction(Up), _wantedDirection(Up), _size(6)
+Player::Player(Coord position) : _position(position), _direction(Up), _wantedDirection(Up), _size(4)
 {
     CreateBody();
     return;
 }
 
-Player::Player(int x, int y) : _position(x, y), _direction(Up), _wantedDirection(Up), _size(6)
+Player::Player(int x, int y) : _position(x, y), _direction(Up), _wantedDirection(Up), _size(4)
 {
     CreateBody();
     return;
@@ -92,4 +92,9 @@ Coord Player::GetPosition()
 std::vector<Coord> Player::GetBody()
 {
     return (this->_body);
+}
+
+int Player::GetSize()
+{
+    return (this->_size);
 }
