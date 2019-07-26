@@ -33,7 +33,7 @@ void Player::CreateBody()
 
 void Player::Move()
 {
-    Coord newHead = *_body.begin();
+    Coord newHead = Coord(this->_body.begin()->x, this->_body.begin()->y);
 
     this->_direction = this->_wantedDirection;
     switch (this->_direction)

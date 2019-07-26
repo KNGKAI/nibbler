@@ -81,7 +81,5 @@ int main(int argc, char **argv){
     {
         std::cout << "Argument Error" << std::endl;
     }
-    
-    
     return 0;
 }

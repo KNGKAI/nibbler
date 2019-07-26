@@ -19,38 +19,37 @@ Game::~Game()
 void Game::CheckPlayer()
 {
     int count;
+    int x;
+    int y;
 
     count = 0;
-    for (std::vector<Coord>::iterator i = this->_player.GetBody().begin(); i < this->_player.GetBody().end(); i++)
+    x = this->_player.GetBody().begin()->x;
+    y = this->_player.GetBody().begin()->y;
+    if (this->_map.GetNode(x, y) != 0)
     {
-        if (this->_map.GetNode(i->x, i->y) != 0)
+        this->GameOver((this->_map.GetNode(x, y) > 0 ? "Collided with wall, x:" : "Out of range, x:") + std::to_string(x) + ", y:" + std::to_string(y) + "; " + std::to_string(this->_map.GetNode(x, y)));
+        return;
+    }
+    for (std::vector<Coord>::iterator i = this->_player.GetBody().begin(); i != this->_player.GetBody().end(); i++)
+    {
+        if (count > 0)
         {
-            this->GameOver((this->_map.GetNode(i->x, i->y) > 0 ? "Collided with wall, x:" : "Out of range, x:") + std::to_string(i->x) + ", y:" + std::to_string(i->y) + "; " + std::to_string(this->_map.GetNode((*i).x, (*i).y)));
-            return;
-        }
-        for (std::vector<Coord>::iterator j = this->_treats.begin(); j < this->_treats.end(); j++)
-        {
-            if ((*i).x == (*j).x && (*i).y == (*j).y)
+            if (i->x == x && i->y == y)
             {
-                this->_player.IncreaseSize();
-                this->_treats.erase(j);
-                break;
+                this->GameOver("Collide with self, x:" + std::to_string(i->x) + ", y:" + std::to_string(i->y) + ";" + std::to_string(count));
             }
-        }
-        int c = 0;
-        for (std::vector<Coord>::iterator k = this->_player.GetBody().begin(); k < this->_player.GetBody().end(); k++)
-        {
-            if (c != count)
-            {
-                if (k->x == i->x && k->y == i->y)
-                {
-                    this->GameOver("Collide with self, x:" + std::to_string(i->x) + ", y:" + std::to_string(i->y) + "; " + std::to_string(count) + ", " + std::to_string(c));
-                }
-            }
-            c++;
         }
         count++;
-        if (count >= this->_player.GetSize()) { return; }
+        if (count >= this->_player.GetSize()) { break; }
+    }
+    for (std::vector<Coord>::iterator j = this->_treats.begin(); j < this->_treats.end(); j++)
+    {
+        if (x == j->x && y == j->y)
+        {
+            this->_player.IncreaseSize();
+            this->_treats.erase(j);
+            break;
+        }
     }
 }
 
