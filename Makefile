@@ -14,6 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "COMPILING MAIN"
+	@mkdir -p bin
 	@$(COMPILER) -w main.cpp -o $(TARGET) $(OBJ) $(FLAGS)
 	@echo "DONE"
 	@echo "COMPILING LIBS"
