@@ -3,21 +3,34 @@
 GraphicEngine::GraphicEngine(int width, int height)
 {
     this->game = new Game(Coord(width, height));
-    
+    // OpenGL
     void *hndl = dlopen("lib/opengl/opengl.dynlib", RTLD_NOW);
     if(hndl == NULL){
         std::cout << dlerror() << std::endl;
         exit(-1);
     }
-    void *mkr = dlsym(hndl, "newGraphic");
-    libs[0] = reinterpret_cast<IGraphic *(*)()>(mkr)();
-
-    currentLib = 0;
+    mkrs[0] = dlsym(hndl, "newGraphic");
+    // SDL
+    hndl = dlopen("lib/opengl/opengl.dynlib", RTLD_NOW);
+    if(hndl == NULL){
+        std::cout << dlerror() << std::endl;
+        exit(-1);
+    }
+    mkrs[1] = dlsym(hndl, "newGraphic");
+    // NCURSES
+    hndl = dlopen("lib/opengl/opengl.dynlib", RTLD_NOW);
+    if(hndl == NULL){
+        std::cout << dlerror() << std::endl;
+        exit(-1);
+    }
+    mkrs[2] = dlsym(hndl, "newGraphic");
+    // Initialise with 1st lib
+    currentLib = reinterpret_cast<IGraphic *(*)()>(mkrs[0])();
 }
 
 IGraphic *GraphicEngine::getCurrentLib()
 {
-    return this->libs[this->currentLib];
+    return this->currentLib;
 }
 
 Map GraphicEngine::getGameMap()

@@ -10,8 +10,8 @@
 
 class GraphicEngine{
     private:
-        size_t currentLib;
-        IGraphic * libs[4];
+        IGraphic * currentLib;
+        void * mkrs[3]; // changed from array of libraries to array of makers
         Game * game;
     public:
         GraphicEngine(int width, int height);
