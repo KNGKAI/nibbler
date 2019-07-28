@@ -1,44 +1,4 @@
-#ifndef GAME_HPP
-#define GAME_HPP
-
-#include <chrono>
-#include <dlfcn.h>
-
-#include "Coord.hpp"
-#include "Map.hpp"
-#include "Player.hpp"
-#include "EKeycode.hpp"
-
-#define FREQ 0.2
-#define FILL 0.3
-
-#define NODE_EMPTY 0
-#define NODE_WALL 1
-#define NODE_PLAYER 2
-#define NODE_TREAT 3
-
-class Game
-{
-    private:
-        Map                 _map;
-        Player              _player;
-		std::vector<Coord>	_treats;
-        bool                _running;
-        bool                _paused;
-
-        void    CheckPlayer();
-        void    CreateTreats();
-        void    GameOver(std::string reason);
-    public:
-        Game(const Coord size);
-        ~Game();
-
-        Map         GetDisplayMap();
-        void        Update();
-        void        Pause();
-        void        Input(EKeycode key);
-        bool        Running();
-};
+#include "Game.hpp"
 
 Game::Game(const Coord size) :
     _map(size),
@@ -113,7 +73,7 @@ void Game::GameOver(std::string reason)
 Map Game::GetDisplayMap()
 {
     Map displayMap(this->_map.GetWidth(), this->_map.GetHeight());
-    
+
     for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++) { displayMap.SetNode((*i).x, (*i).y, NODE_TREAT); }
     for (int x = 0; x < displayMap.GetWidth(); x++)
     {
@@ -126,21 +86,13 @@ Map Game::GetDisplayMap()
     return (displayMap);
 }
 
-void Game::Start()
-{
-    if (this->_running) return;
-    this->_running = true;
-    while (this->_running) Update();
-}
-
 void Game::Update()
 {
     if (this->_paused) { return; }
+    if (!this->_running) { return; }
     this->_player.Move();
     CheckPlayer();
 }
-
-void Game::Pause() { this->_paused = !this->_paused; }
 
 void Game::Input(EKeycode key)
 {
@@ -151,12 +103,11 @@ void Game::Input(EKeycode key)
         case Keycode_Left: this->_player.ChangeDirection(Left); break;
         case Keycode_Right: this->_player.ChangeDirection(Right); break;
         case Keycode_Pause: this->Pause(); break;
-        case Keycode_Exit: this->_running = false; break;
+        case Keycode_Exit: std::exit(0); break;
         default: break;
     }
 }
 
-bool Game::Running() { return(this->_running); }
+void Game::Pause() { this->_paused = !this->_paused; }
 
-#endif
-#endif
+bool Game::Running() { return(this->_running); }
