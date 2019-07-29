@@ -20,6 +20,15 @@ Map::Map(int width, int height) : _size(width, height)
 
 Map::~Map()
 {
+    for (int x = 0; x < this->GetWidth(); x++)
+    {
+        for (int y = 0; y < this->GetHeight(); y++)
+        {
+            //delete this->_nodes[x][y];
+        }
+        delete[] this->_nodes[x];
+    }
+    delete[] this->_nodes;
     return;
 }
 
