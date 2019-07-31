@@ -1,6 +1,6 @@
 NAME = nibbler
 
-TARGET_DIR = ./bin/
+TARGET_DIR = ./
 TARGET = $(TARGET_DIR)$(NAME)
 
 

@@ -3,8 +3,11 @@
 
     #include "IGraphic.hpp"
     #include "Game.hpp"
+    #include "curses.h"
 
     class Ncurses : public IGraphic{
+        private:
+            WINDOW * _win;
         public:
             Ncurses();
             ~Ncurses();

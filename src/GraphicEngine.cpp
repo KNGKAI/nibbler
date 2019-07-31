@@ -5,7 +5,7 @@ GraphicEngine::GraphicEngine(int width, int height)
     this->game = new Game(Coord(width, height));
     this->lib = nullptr;
     //this->loadLibrary("lib/ncurses/ncurses.dynlib");
-    this->loadLibrary("lib/opengl/opengl.dynlib");
+    //this->loadLibrary("lib/opengl/opengl.dynlib");
     //this->loadLibrary("lib/sdl/sdl.dynlib");
 }
 
@@ -88,9 +88,4 @@ void GraphicEngine::inputToGame(int i)
             this->loadLibrary("lib/sdl/sdl.dynlib");
             break;
     }
-}
-
-const char *	GraphicEngine::LibraryNotFoundException::what() const throw()
-{
-	return "Library not found.";
 }

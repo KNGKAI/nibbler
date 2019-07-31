@@ -14,7 +14,7 @@ Ncurses::~Ncurses()
 void Ncurses::open()
 {
     if (this->init) { return; }
-    initscr();
+    this->_win = initscr();
     cbreak();
     keypad(stdscr, TRUE);
     noecho();
