@@ -97,7 +97,13 @@ Map Game::GetDisplayMap()
         }
     }
     displayMap.SetNode(this->_player.GetPosition().x, this->_player.GetPosition().y, NODE_PLAYER);
-    for (std::vector<Coord>::iterator j = this->_player.GetBody().begin(); j != this->_player.GetBody().end(); j++) { displayMap.SetNode(j->x, j->y, NODE_PLAYER); }
+    int count = 0;
+    for (std::vector<Coord>::iterator j = this->_player.GetBody().begin(); j != this->_player.GetBody().end(); j++)
+    {
+        displayMap.SetNode(j->x, j->y, NODE_PLAYER);
+        count++;
+        if (count > this->_player.GetSize()) { break; }
+    }
     return (displayMap);
 }
 
