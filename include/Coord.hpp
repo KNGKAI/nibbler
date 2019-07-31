@@ -6,6 +6,7 @@ class Coord
     public:
         Coord();
         Coord(int _x, int _y);
+        Coord(const Coord &src);
         ~Coord();
 
         int x;

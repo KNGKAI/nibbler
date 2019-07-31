@@ -23,8 +23,8 @@ void Game::CheckPlayer()
     int y;
 
     count = 0;
-    x = this->_player.GetBody().begin()->x;
-    y = this->_player.GetBody().begin()->y;
+    x = this->_player.GetPosition().x;
+    y = this->_player.GetPosition().y;
     if (this->_map.GetNode(x, y) != 0)
     {
         this->GameOver((this->_map.GetNode(x, y) > 0 ? "Collided with wall, x:" : "Out of range, x:") + std::to_string(x) + ", y:" + std::to_string(y) + "; " + std::to_string(this->_map.GetNode(x, y)));
@@ -55,11 +55,25 @@ void Game::CheckPlayer()
 
 void Game::CreateTreats()
 {
-    for (int x = 0; x < this->_map.GetWidth(); x++)
+    bool placed;
+    int x;
+    int y;
+    int c;
+
+    for (int i = 0; i < 30; i++)
     {
-        for (int y = 0; y < this->_map.GetHeight(); y++)
+        placed = false;
+        c = 1;
+        while (!placed)
         {
-            if (this->_map.GetNode(x, y) == 0 && x % 5 == 0 && y % 5 == 0 && x != this->_map.GetWidth() / 2) { this->_treats.push_back(Coord(x, y)); }
+            x = (i * 4409 + c * 3877) % this->_map.GetWidth();
+            y = (i * 6997 + c * 6701) % this->_map.GetHeight();
+            if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
+            {
+                this->_treats.push_back(Coord(x, y));
+                placed = true;
+            }
+            c++;
         }
     }
 }
@@ -82,7 +96,11 @@ Map Game::GetDisplayMap()
             if (this->_map.GetNode(x, y) > 0) { displayMap.SetNode(x, y, NODE_WALL); }
         }
     }
-    for (std::vector<Coord>::iterator i = this->_player.GetBody().begin(); i < this->_player.GetBody().end(); i++) { displayMap.SetNode(i->x, i->y, NODE_PLAYER); }
+    displayMap.SetNode(this->_player.GetPosition().x, this->_player.GetPosition().y, NODE_PLAYER);
+    for (std::vector<Coord>::iterator j = this->_player.GetBody().begin(); j != this->_player.GetBody().end(); j++)
+    {
+        displayMap.SetNode(j->x, j->y, NODE_PLAYER);
+    }
     return (displayMap);
 }
 

@@ -22,10 +22,6 @@ Map::~Map()
 {
     for (int x = 0; x < this->GetWidth(); x++)
     {
-        for (int y = 0; y < this->GetHeight(); y++)
-        {
-            //delete this->_nodes[x][y];
-        }
         delete[] this->_nodes[x];
     }
     delete[] this->_nodes;
@@ -95,13 +91,13 @@ int **Map::GetNodes() const
 int Map::GetNode(int x, int y) const
 {
     if (this->OutOfRange(x, y)) { return (-1); }
-    return (_nodes[x][y]);
+    return (this->_nodes[x][y]);
 }
 
 void Map::SetNode(int x, int y, int value)
 {
     if (this->OutOfRange(x, y)) { return; }
-    _nodes[x][y] = value;
+    this->_nodes[x][y] = value;
 }
 
 void Map::Clear()

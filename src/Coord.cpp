@@ -1,10 +1,16 @@
 #include "Coord.hpp"
 
-Coord::Coord() : x(0), y(0) {}
+Coord::Coord() : x(0), y(0) { return; }
 
-Coord::Coord(int _x, int _y) : x(_x), y(_y){}
+Coord::Coord(int _x, int _y) : x(_x), y(_y) { return; }
 
-Coord::~Coord() {}
+Coord::Coord(const Coord &src)
+{
+    *this = src;
+    return;
+}
+
+Coord::~Coord() { return; }
 
 Coord &Coord::operator=(const Coord &rhs)
 {

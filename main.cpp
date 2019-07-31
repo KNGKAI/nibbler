@@ -5,7 +5,7 @@
 #define _GNU_SOURCE
 #include <iomanip>
 
-#define MS_PER_UPDATE 250
+#define MS_PER_UPDATE 100
 #define WIDTH 40
 #define HEIGHT 20
 
