@@ -18,7 +18,7 @@ class IGraphic{
         virtual void    close() = 0;
         virtual void    processInput() = 0;
         virtual void    render(Map & m) = 0;
-        virtual int     getCommand() = 0;
+        virtual int     getCommand() = 0; 
 };
 
 #endif

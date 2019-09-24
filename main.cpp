@@ -51,6 +51,7 @@ int main(int argc, char **argv){
             myEngine = GraphicEngine(w, h);
             try
             {
+                std::cout << "Trying to load Graphics engine\n";
                 myEngine.loadLibrary(lib);
             }
             catch(const std::exception& e)

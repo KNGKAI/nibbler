@@ -4,9 +4,9 @@ GraphicEngine::GraphicEngine(int width, int height)
 {
     this->game = new Game(Coord(width, height));
     this->lib = nullptr;
-    //this->loadLibrary("lib/ncurses/ncurses.dynlib");
-    this->loadLibrary("lib/opengl/opengl.dynlib");
-    //this->loadLibrary("lib/sdl/sdl.dynlib");
+    // this->loadLibrary("lib/ncurses/ncurses.dynlib");
+    // this->loadLibrary("lib/opengl/opengl.dynlib");
+    this->loadLibrary("lib/sdl/sdl.dynlib");
 }
 
 GraphicEngine::~GraphicEngine()
@@ -23,7 +23,7 @@ void GraphicEngine::loadLibrary(std::string name)
         dlclose(this->handler);
     }
     this->handler = dlopen(name.c_str(), RTLD_NOW);
-    if(this->handler == NULL){
+    if(this->handler == NULL) {
         throw GraphicEngine::LibraryNotFoundException();
     }
     void *mkr = dlsym(this->handler, "newGraphic");

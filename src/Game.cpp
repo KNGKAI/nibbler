@@ -7,7 +7,7 @@ Game::Game(const Coord size) :
     _paused(true)
 {
     this->CreateTreats();
-    this->_map.PerlinFill(FREQ, 0, FILL);
+    // this->_map.PerlinFill(FREQ, 0, FILL);
     return;
 }
 
@@ -60,35 +60,67 @@ void Game::CreateTreats()
     int y;
     int c;
 
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 3; i++)
     {
-        placed = false;
-        c = 1;
-        while (!placed)
-        {
-            x = (i * 4409 + c * 3877) % this->_map.GetWidth();
-            y = (i * 6997 + c * 6701) % this->_map.GetHeight();
-            if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
-            {
-                this->_treats.push_back(Coord(x, y));
-                placed = true;
-            }
-            c++;
-        }
+        this->_treats.push_back(generateTreat());
+        // placed = false;
+        // c = 1;
+        // while (!placed)
+        // {
+        //     // y = ( 6997 + c * 6701) % this->_map.GetHeight();
+        //     // x = ( 4409 + c * 3877) % this->_map.GetWidth();
+        //     y = (i * 6997 + c * 6701) % this->_map.GetHeight();
+        //     x = (i * 4409 + c * 3877) % this->_map.GetWidth();
+        //     if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
+        //     {
+        //         this->_treats.push_back(Coord(x, y));
+        //         placed = true;
+        //     }
+        //     c++;
+        // }
     }
 }
 
+
+Coord Game::generateTreat() 
+{
+    int x;
+    int y;
+    int c;
+
+    c = rand() % this->_map.GetWidth();
+    while (true)
+    {
+        y = ( 6997 + c * 6701) % this->_map.GetHeight();
+        x = ( 4409 + c * 3877) % this->_map.GetWidth();
+        if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
+        {
+            return (Coord(x, y));
+        }
+        c = rand() % this->_map.GetWidth();
+    }
+}
 void Game::GameOver(std::string reason)
 {
     std::cout << std::endl << "Game Over: " << reason << std::endl;
     this->_running = false;
+    exit(0);
 }
 
 Map Game::GetDisplayMap()
 {
     Map displayMap(this->_map.GetWidth(), this->_map.GetHeight());
-
-    for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++) { displayMap.SetNode((*i).x, (*i).y, NODE_TREAT); }
+    // place treats
+    if (_treats.size() == 0 ) { 
+        std::cout << "YOU HAVE WON\n"; 
+        this->_running = false;
+        exit(0);
+    }
+    for (std::vector<Coord>::iterator i = this->_treats.begin(); i < this->_treats.end(); i++) 
+    { 
+        displayMap.SetNode((*i).x, (*i).y, NODE_TREAT); 
+    }
+    // place walls
     for (int x = 0; x < displayMap.GetWidth(); x++)
     {
         for (int y = 0; y < displayMap.GetHeight(); y++)
@@ -96,6 +128,7 @@ Map Game::GetDisplayMap()
             if (this->_map.GetNode(x, y) > 0) { displayMap.SetNode(x, y, NODE_WALL); }
         }
     }
+    // place player
     displayMap.SetNode(this->_player.GetPosition().x, this->_player.GetPosition().y, NODE_PLAYER);
     int count = 0;
     for (std::vector<Coord>::iterator j = this->_player.GetBody().begin(); j != this->_player.GetBody().end(); j++)

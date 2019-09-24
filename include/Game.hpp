@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <dlfcn.h>
+#include <stdlib.h>
 
 #include "Coord.hpp"
 #include "Map.hpp"
@@ -19,25 +20,27 @@
 
 class Game
 {
-    private:
-        Map                 _map;
-        Player              _player;
-		std::vector<Coord>	_treats;
-        bool                _running;
-        bool                _paused;
+private:
+    Map _map;
+    Player _player;
+    std::vector<Coord> _treats;
+    bool _running;
+    bool _paused;
 
-        void    CheckPlayer();
-        void    CreateTreats();
-        void    GameOver(std::string reason);
-    public:
-        Game(const Coord size);
-        ~Game();
+    void CheckPlayer();
+    void CreateTreats();
+    Coord generateTreat();
+    void GameOver(std::string reason);
 
-        Map         GetDisplayMap();
-        void        Update();
-        void        Pause();
-        void        Input(EKeycode key);
-        bool        Running();
+public:
+    Game(const Coord size);
+    ~Game();
+
+    Map GetDisplayMap();
+    void Update();
+    void Pause();
+    void Input(EKeycode key);
+    bool Running();
 };
 
 #endif

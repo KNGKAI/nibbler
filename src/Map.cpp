@@ -37,7 +37,10 @@ Map &Map::operator=(const Map &rhs)
 
 bool Map::OutOfRange(int x, int y) const
 {
-    if (x < 0 || y < 0 || x >= this->GetWidth() || y >= this->GetHeight()) { return (true); }
+    if (x < 0 || y < 0 || x >= this->GetWidth() || y >= this->GetHeight())
+    { 
+        return (true); 
+    }
     return (false);
 }
 
@@ -48,6 +51,7 @@ void Map::CreateNodes()
     {
         this->_nodes[i] = new int[this->_size.y];
     }
+    
     for (int x = 0; x < this->GetWidth(); x++)
     {
         for (int y = 0; y < this->GetHeight(); y++)

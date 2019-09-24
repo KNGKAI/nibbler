@@ -25,6 +25,7 @@ class GraphicEngine{
         Map         getGameMap();
         void        updateGame();
         void        inputToGame(int i);
+        
         class LibraryNotFoundException : public std::exception
         {
             public:
