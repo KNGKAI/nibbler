@@ -7,7 +7,7 @@ Game::Game(const Coord size) :
     _paused(true)
 {
     this->CreateTreats();
-    // this->_map.PerlinFill(FREQ, 0, FILL);
+    this->_map.PerlinFill(FREQ, 0, FILL);
     return;
 }
 
@@ -60,24 +60,24 @@ void Game::CreateTreats()
     int y;
     int c;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 30; i++)
     {
         this->_treats.push_back(generateTreat());
-        // placed = false;
-        // c = 1;
-        // while (!placed)
-        // {
-        //     // y = ( 6997 + c * 6701) % this->_map.GetHeight();
-        //     // x = ( 4409 + c * 3877) % this->_map.GetWidth();
-        //     y = (i * 6997 + c * 6701) % this->_map.GetHeight();
-        //     x = (i * 4409 + c * 3877) % this->_map.GetWidth();
-        //     if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
-        //     {
-        //         this->_treats.push_back(Coord(x, y));
-        //         placed = true;
-        //     }
-        //     c++;
-        // }
+        placed = false;
+        c = 1;
+        while (!placed)
+        {
+            // y = ( 6997 + c * 6701) % this->_map.GetHeight();
+            // x = ( 4409 + c * 3877) % this->_map.GetWidth();
+            y = (i * 6997 + c * 6701) % this->_map.GetHeight();
+            x = (i * 4409 + c * 3877) % this->_map.GetWidth();
+            if (this->_map.GetNode(x, y) == 0 && x != this->_map.GetWidth() / 2)
+            {
+                this->_treats.push_back(Coord(x, y));
+                placed = true;
+            }
+            c++;
+        }
     }
 }
 
